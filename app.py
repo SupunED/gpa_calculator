@@ -5,6 +5,8 @@ app = Flask(__name__)
 
 # Get sqlite3 database Conection
 con = sqlite3.connect("gpa.db")
+# create a cursor
+cursor = con.cursor()
 
 @app.route("/")
 def index():
@@ -33,3 +35,13 @@ def register():
     else:
         # Yet to implement
         pass
+    
+@app.route("/ongoing")
+def ongoing():
+    # Yet to implement
+    pass
+
+@app.route("/results")
+def results():
+    # Yet to implement
+    pass
