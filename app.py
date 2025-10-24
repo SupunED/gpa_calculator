@@ -1,5 +1,6 @@
 from flask import Flask, render_template, flash, request
 import sqlite3
+from config import login_required
 
 app = Flask(__name__)
 
@@ -9,10 +10,11 @@ con = sqlite3.connect("gpa.db")
 cursor = con.cursor()
 
 @app.route("/")
+@login_required
 def index():
     return render_template("index.html")
 
-@app.route("/login", method=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     
     # If user requests login page
@@ -24,7 +26,7 @@ def login():
         # Yet to implement
         pass
     
-@app.route("/register", method=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
     
     # if the user requests the register page
@@ -36,12 +38,16 @@ def register():
         # Yet to implement
         pass
     
+
 @app.route("/ongoing")
+@login_required
 def ongoing():
     # Yet to implement
     pass
 
+
 @app.route("/results")
+@login_required
 def results():
     # Yet to implement
     pass
