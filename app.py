@@ -124,3 +124,7 @@ def results():
 def enroll():
     # Yet to implement
     pass
+
+
+if __name__ == "__main__":
+    app.run()

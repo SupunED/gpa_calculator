@@ -1,0 +1,4 @@
+flask
+flask_sessions
+sqlite3
+gunicorn
