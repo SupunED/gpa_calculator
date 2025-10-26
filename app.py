@@ -19,11 +19,13 @@ def index():
     con = get_db()
     cursor = con.cursor()
 
-    user_data = cursor.execute('SELECT firstname, lastname FROM student WHERE id = ?', (user_id,)).fetchone()
-    greet = f"Welcome, {user_data['firstname']} {user_data['lastname']}" if user_data else ""
+    user_data = cursor.execute('SELECT * FROM student WHERE id = ?', (user_id,)).fetchone()
+    greet = f"Welcome back, {user_data['firstname']} {user_data['lastname']}!👋" if user_data else ""
+    cgpa = user_data['cgpa']
+
     con.close()
 
-    return render_template("index.html", greeting=greet)
+    return render_template("index.html", greeting=greet, cgpa=cgpa)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -117,3 +119,8 @@ def ongoing():
 @login_required
 def results():
     return render_template("results.html")
+
+@app.route("/enroll")
+def enroll():
+    # Yet to implement
+    pass

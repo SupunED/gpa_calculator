@@ -1,7 +1,55 @@
 {% extends "layout.html" %}
 
-{% block title %} Index {% endblock title %}
+{% block title %}Index{% endblock title %}
 
 {% block main %}
-        <h3>{{ greeting }}</h3>
+<h3>{{ greeting }}</h3>
+
+<div class="alert alert-light border rounded shadow-sm text-center mb-5">
+    <h4 class="mb-0">Your Current CGPA is: 
+        <span class="fw-bold text-success">{{ cgpa }}</span>
+    </h4>
+</div>
+
+<div class="card shadow-lg mx-auto" style="max-width: 550px; border-radius: 20px;">
+    <div class="card-body p-4">
+        <h2 class="text-center text-primary mb-4">Enroll in a New Module</h2>
+        <form action="/enroll" method="post">
+
+            <div class="mb-3">
+                <label for="course_id" class="form-label fw-semibold">Course ID</label>
+                <input autocomplete="off" autofocus class="form-control" id="course_id" 
+                       name="course_id" placeholder="e.g., CS101" type="text" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="course_name" class="form-label fw-semibold">Course Name</label>
+                <input autocomplete="off" class="form-control" id="course_name" 
+                       name="course_name" placeholder="e.g., Data Structures" type="text" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="credits" class="form-label fw-semibold">Credits</label>
+                <input class="form-control" id="credits" name="credits" placeholder="Enter credits (0–10)"
+                       type="number" max="10" min="0" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-semibold d-block">Status</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" id="ongoing" name="status" type="radio" value="Ongoing" required>
+                    <label class="form-check-label" for="ongoing">Ongoing</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" id="completed" name="status" type="radio" value="Completed">
+                    <label class="form-check-label" for="completed">Completed</label>
+                </div>
+            </div>
+
+            <div class="d-grid">
+                <button class="btn btn-primary btn-lg fw-semibold" type="submit">Enroll Module</button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
