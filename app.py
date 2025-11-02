@@ -16,16 +16,21 @@ Session(app)
 def index():
     user_id = session.get('user_id')
 
-    con = get_db()
-    cursor = con.cursor()
+    if request.method == "GET":
+        con = get_db()
+        cursor = con.cursor()
 
-    user_data = cursor.execute('SELECT * FROM student WHERE id = ?', (user_id,)).fetchone()
-    greet = f"Welcome back, {user_data['firstname']} {user_data['lastname']}!👋" if user_data else ""
-    cgpa = user_data['cgpa']
+        user_data = cursor.execute('SELECT * FROM student WHERE id = ?', (user_id,)).fetchone()
+        greet = f"Welcome back, {user_data['firstname']} {user_data['lastname']}!👋" if user_data else ""
+        cgpa = user_data['cgpa']
 
-    con.close()
+        con.close()
 
-    return render_template("index.html", greeting=greet, cgpa=cgpa)
+        return render_template("index.html", greeting=greet, cgpa=cgpa)
+    
+    else:
+        pass
+
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -118,6 +123,11 @@ def ongoing():
 @app.route("/results")
 @login_required
 def results():
+    user_id = session.get('user_id')
+
+
+
+
     return render_template("results.html")
 
 @app.route("/enroll")

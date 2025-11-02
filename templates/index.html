@@ -46,10 +46,38 @@
                 </div>
             </div>
 
+            <div class="mb-4" id="grade-field" style="display: none;">
+                <label for="grade" class="form-label fw-semibold">Grade</label>
+                <input class="form-control" id="grade" name="grade" placeholder="eg: A+, A, A-" type="text" title="Enter grade like A+, A, B+, B, etc.">
+            </div>
+
             <div class="d-grid">
                 <button class="btn btn-primary btn-lg fw-semibold" type="submit">Enroll Module</button>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+    const ongoingRadio = document.getElementById('ongoing');
+    const completedRadio = document.getElementById('completed');
+    const gradeField = document.getElementById('grade-field');
+    const gradeInput = document.getElementById('grade');
+
+    function toggleGradeField() {
+        if (completedRadio.checked) {
+            gradeField.style.display = 'block';
+            gradeInput.required = true;
+        } else {
+            gradeField.style.display = 'none';
+            gradeInput.required = false;
+            gradeInput.value = '';
+        }
+    }
+
+    ongoingRadio.addEventListener('change', toggleGradeField);
+    completedRadio.addEventListener('change', toggleGradeField);
+</script>
+
+
 {% endblock %}
